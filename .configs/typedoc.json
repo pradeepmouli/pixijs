@@ -28,6 +28,7 @@
         }
     ],
     "plugin": [
+        "typedoc-plugin-to-skills",
         "typedoc-plugin-ga",
         "typedoc-plugin-mdn-links",
         "typedoc-plugin-no-inherit",
@@ -37,6 +38,8 @@
         "../scripts/plugins/typedoc-plugin-llms-txt.mjs",
         "../scripts/plugins/typedoc-plugin-stackblitz.mjs"
     ],
+    "skillsAudit": true,
+    "blockTags": ["@useWhen", "@avoidWhen", "@pitfalls", "@config"],
     "customJs": "../scripts/plugins/typedoc-custom.mjs",
     "lightHighlightTheme": "github-light-default",
     "darkHighlightTheme": "github-dark-default",
