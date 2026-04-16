@@ -87,6 +87,18 @@ export interface Graphics extends PixiMixins.Graphics, ViewContainer<GraphicsGpu
  * // Use as a mask
  * sprite.mask = graphics;
  * ```
+ * @useWhen
+ * - Drawing shapes, lines, curves, and paths programmatically
+ * - Creating masks for other display objects
+ *
+ * @avoidWhen
+ * - Displaying static images — use Sprite instead (much faster)
+ * - Drawing the same shape every frame — cache as texture with generateTexture()
+ *
+ * @pitfalls
+ * - NEVER modify Graphics geometry every frame — it rebuilds the mesh. Cache as texture for static shapes
+ * - NEVER use the v7 API (beginFill, drawRect) — v8 uses a completely new chainable API
+ *
  * @see {@link GraphicsContext} For the underlying drawing API
  * @see {@link GraphicsPath} For path creation
  * @category scene

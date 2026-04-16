@@ -1,10 +1,16 @@
 ---
 name: pixi-js
-description: API reference for pixi.js
+description: "PixiJS — The HTML5 Creation Engine. A fast, lightweight 2D rendering library
+that works across all modern browsers supporting WebGL, WebGPU, and Canvas.
+Build games, interactive visualizations, animated UIs, and creative experiences."
 license: MIT
 ---
 
 # pixi.js
+
+PixiJS — The HTML5 Creation Engine. A fast, lightweight 2D rendering library
+that works across all modern browsers supporting WebGL, WebGPU, and Canvas.
+Build games, interactive visualizations, animated UIs, and creative experiences.
 
 ## When to Use
 

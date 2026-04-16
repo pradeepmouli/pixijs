@@ -1,4 +1,27 @@
 /**
+ * PixiJS — The HTML5 Creation Engine. A fast, lightweight 2D rendering library
+ * that works across all modern browsers supporting WebGL, WebGPU, and Canvas.
+ * Build games, interactive visualizations, animated UIs, and creative experiences.
+ *
+ * @useWhen
+ * - Building 2D games, animations, or interactive graphics for the web
+ * - You need high-performance sprite rendering with WebGL/WebGPU
+ * - Creating data visualizations with thousands of animated elements
+ * - Building rich interactive UIs beyond what CSS can handle
+ *
+ * @avoidWhen
+ * - Building 3D scenes — use Three.js or Babylon.js instead
+ * - Simple DOM-based animations — CSS transitions are simpler
+ * - Static charts — use D3 or Chart.js instead
+ *
+ * @pitfalls
+ * - NEVER use v7 API patterns (beginFill/drawRect) in v8 — the Graphics API was completely rewritten
+ * - NEVER skip app.init() in v8 — initialization is now async and required before rendering
+ * - NEVER create textures from unloaded images — always use Assets.load() first
+ * - NEVER put individual event listeners on thousands of sprites — use event delegation on the stage
+ * - NEVER modify Graphics every frame — cache as a texture via renderer.generateTexture()
+ * - NEVER use Sprite masks at scale — use stencil masks for better performance
+ *
  * @packageDocumentation
  * @document __docs__/concepts/architecture.md
  * @document __docs__/concepts/scene-graph.mdx

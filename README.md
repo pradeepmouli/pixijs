@@ -104,6 +104,14 @@ This content is released under the [MIT License](http://opensource.org/licenses/
 ### Change Log
 [Releases](https://github.com/pixijs/pixijs/releases)
 
+## Troubleshooting
+
+- **White/blank canvas** — Check that `await app.init()` completed before adding children. In v8, initialization is async.
+- **"beginFill is not a function"** — You're using v7 Graphics API. In v8, use `graphics.rect(0,0,100,100).fill('red')` instead.
+- **Sprites not showing** — Ensure textures are loaded via `Assets.load()` before creating sprites.
+- **Poor performance with many sprites** — Use ParticleContainer for thousands of identical sprites, or batch draw calls by texture.
+- **Events not firing** — Set `eventMode: 'static'` on the container (v8 replaced `interactive: true`).
+
 ### Support
 We're passionate about making PixiJS the best graphics library possible. Our dedication comes from our love for the project and community. If you'd like to support our efforts, please consider contributing to our open collective.
 <div>

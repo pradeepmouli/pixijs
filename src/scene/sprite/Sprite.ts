@@ -125,6 +125,18 @@ export interface Sprite extends PixiMixins.Sprite, ViewContainer<BatchableSprite
  *     sprite.scale.x = Math.sin(performance.now() / 1000) + 1; // Pulse scale
  * });
  * ```
+ * @useWhen
+ * - Displaying images, texture regions, or sprite sheets
+ * - You need fast batched rendering of many images
+ *
+ * @avoidWhen
+ * - Drawing dynamic shapes — use Graphics instead
+ * - Rendering text — use Text or BitmapText
+ *
+ * @pitfalls
+ * - NEVER create Sprites from unloaded textures — always Assets.load() first
+ * - NEVER use Sprite.from() in hot loops — it creates new textures each call
+ *
  * @category scene
  * @standard
  * @see {@link SpriteOptions} For configuration options

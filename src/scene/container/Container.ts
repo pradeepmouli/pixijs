@@ -649,6 +649,15 @@ export interface Container<C extends ContainerChild>
  * 2. groupTransform, this it the transform of the container relative to the renderGroup it belongs too
  * 3. worldTransform, this is the transform of the container relative to the Scene being rendered
  * </details>
+ *
+ * @useWhen
+ * - Building a scene hierarchy with parent-child relationships
+ * - Grouping display objects for transforms, visibility, or event handling
+ *
+ * @pitfalls
+ * - NEVER add a container to itself — creates infinite loop
+ * - NEVER forget to call destroy() when removing — causes memory leaks
+ *
  * @category scene
  * @standard
  */

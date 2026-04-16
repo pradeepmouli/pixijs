@@ -1353,6 +1353,14 @@ export class AssetsClass
  * > [!IMPORTANT]
  * > When unloading assets, ensure they aren't being used elsewhere
  * > in your application to prevent missing texture references.
+ * @useWhen
+ * - Loading textures, sprites, fonts, or any external resources
+ * - Pre-loading assets before showing content
+ *
+ * @pitfalls
+ * - NEVER load assets synchronously or skip await — textures will be empty/white
+ * - NEVER load the same asset URL multiple times — use Assets.get() for cached access
+ *
  * @see {@link AssetInitOptions} For initialization options
  * @see {@link AssetsPreferences} For advanced preferences
  * @see {@link BackgroundLoader} For background loading capabilities

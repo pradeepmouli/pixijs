@@ -14,6 +14,22 @@
         {
             "tagName": "@noInheritDoc",
             "syntaxKind": "block"
+        },
+        {
+            "tagName": "@useWhen",
+            "syntaxKind": "block"
+        },
+        {
+            "tagName": "@avoidWhen",
+            "syntaxKind": "block"
+        },
+        {
+            "tagName": "@pitfalls",
+            "syntaxKind": "block"
+        },
+        {
+            "tagName": "@config",
+            "syntaxKind": "block"
         }
     ]
 }

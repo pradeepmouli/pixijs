@@ -159,6 +159,18 @@ export interface Application extends PixiMixins.Application { }
  * ```
  * > [!IMPORTANT] From PixiJS v8.0.0, the application must be initialized using the async `init()` method
  * > rather than passing options to the constructor.
+ *
+ * @useWhen
+ * - Starting a new PixiJS project — Application manages the renderer, ticker, and stage
+ * - You want automatic resize handling and animation loop
+ *
+ * @avoidWhen
+ * - You need manual control over the render loop — create Renderer directly instead
+ *
+ * @pitfalls
+ * - NEVER forget to call app.init() — v8 initialization is async
+ * - NEVER access app.renderer before init() completes — it's undefined
+ *
  * @category app
  * @standard
  * @see {@link ApplicationOptions} For all available initialization options

@@ -156,6 +156,12 @@ type Runners = {[key in DefaultRunners]: SystemRunner} & {
  * | {@link ExtractSystem}               | This extracts image data from display objects.                               |
  *
  * The breadth of the API surface provided by the renderer is contained within these systems.
+ * @useWhen
+ * - You need manual control over rendering (no Application wrapper)
+ *
+ * @pitfalls
+ * - NEVER forget to call renderer.render(stage) in your own loop — nothing displays without it
+ *
  * @abstract
  * @category rendering
  * @advanced

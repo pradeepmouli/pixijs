@@ -153,6 +153,10 @@ export interface CanvasTextOptions extends TextOptions
  * - Texture is regenerated when text or style changes
  * - Use BitmapText for better performance with static text
  * - Consider texture style options for quality vs performance tradeoffs
+ * @pitfalls
+ * - NEVER change Text content every frame — it re-rasterizes the entire string. Use BitmapText for frequently updating text
+ * - NEVER use Text for score counters or timers in games — BitmapText is 10-100x faster for dynamic text
+ *
  * @category text
  * @standard
  * @see {@link TextStyle} For detailed style options
