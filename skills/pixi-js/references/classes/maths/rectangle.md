@@ -5,12 +5,16 @@
 ### `Rectangle`
 The `Rectangle` object represents a rectangular area defined by its position and dimensions.
 Used for hit testing, bounds calculation, and general geometric operations.
-*extends `Rectangle`*
 *implements `ShapePrimitive`*
 ```ts
 constructor(x: string | number, y: string | number, width: string | number, height: string | number): Rectangle
 ```
-*Inherits 5 properties from `Rectangle` — see [`Rectangle`](../rectangle.md)*
+**Properties:**
+- `type: SHAPE_PRIMITIVE` — The type of the object, mainly used to avoid `instanceof` checks
+- `x: number` — The X coordinate of the upper-left corner of the rectangle
+- `y: number` — The Y coordinate of the upper-left corner of the rectangle
+- `width: number` — The overall width of this rectangle
+- `height: number` — The overall height of this rectangle
 **Methods:**
 - `isEmpty(): boolean` — Determines whether the Rectangle is empty (has no area).
 - `clone(): Rectangle` — Creates a clone of this Rectangle

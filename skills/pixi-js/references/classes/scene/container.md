@@ -191,7 +191,7 @@ This means that Containers have 3 levels of matrix to be mindful of:
 2. groupTransform, this it the transform of the container relative to the renderGroup it belongs too
 3. worldTransform, this is the transform of the container relative to the Scene being rendered
 </details>
-*extends `Container<C>`*
+*extends `EventEmitter<ContainerEvents<C> & AnyEvent>`*
 ```ts
 constructor<C>(options: ContainerOptions<C>): Container<C>
 ```

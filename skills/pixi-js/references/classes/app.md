@@ -16,11 +16,18 @@ Key features:
   - ResizePlugin for automatic resizing
   - TickerPlugin for managing frame updates
   - CullerPlugin for culling off-screen objects
-*extends `Application`*
 ```ts
 constructor<R>(): Application<R>
 ```
-*Inherits 4 properties from `Application` — see [`Application`](../application.md)*
+**Properties:**
+- `stage: Container` — The root display container for your application.
+All visual elements should be added to this container or its children.
+- `renderer: R` — The renderer instance that handles all drawing operations.
+
+Unless specified, it will automatically create a WebGL renderer if available.
+If WebGPU is available and the `preference` is set to `webgpu`, it will create a WebGPU renderer.
+- `resizeTo: HTMLElement | Window` — Element to automatically resize the renderer to.
+- `ticker: Ticker` — The application's ticker instance that manages the update/render loop.
 **Methods:**
 - `init(options?: Partial<ApplicationOptions>): Promise<void>` — Initializes the PixiJS application with the specified options.
 

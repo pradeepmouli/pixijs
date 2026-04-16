@@ -7,7 +7,6 @@ The ObservablePoint object represents a location in a two-dimensional coordinate
 Triggers a callback when its position changes.
 
 The x and y properties represent the position on the horizontal and vertical axes, respectively.
-*extends `ObservablePoint`*
 *implements `PointLike`*
 ```ts
 constructor(observer: Observer<ObservablePoint>, x?: number, y?: number): ObservablePoint
