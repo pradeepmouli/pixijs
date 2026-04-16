@@ -220,5 +220,99 @@ Fired when a touch interaction moves while over the display object.
 Fired when a touch interaction moves anywhere, regardless of whether the pointer is over this object.
 The object must have `eventMode` set to 'static' or 'dynamic' to receive this event.
 - `ontouchstart: FederatedEventHandler<FederatedPointerEvent>` (optional) — Property-based event handler for the `touchstart` event.
+Fired when a touch interaction starts, such as when a finger touches the screen.
+- `onwheel: FederatedEventHandler<FederatedWheelEvent>` (optional) — Property-based event handler for the `wheel` event.
+Fired when the mouse wheel is scrolled while over the display object.
+- `onRender: (renderer: Renderer) => void` — This callback is used when the container is rendered. It runs every frame during the render process,
+making it ideal for per-frame updates and animations.
 
-<!-- truncated -->
+> [!NOTE] In v7 many users used `updateTransform` for this, however the way v8 renders objects is different
+> and "updateTransform" is no longer called every frame
+- `filterArea: Rectangle` (optional) — The area the filter is applied to. This is used as an optimization to define a specific region
+for filter effects instead of calculating the display object bounds each frame.
+
+> [!NOTE]
+> Setting this to a custom Rectangle allows you to define a specific area for filter effects,
+> which can improve performance by avoiding expensive bounds calculations.
+- `effects: Effect[]` (optional) — todo Needs docs
+- `mask: Mask` — Sets a mask for the displayObject. A mask is an object that limits the visibility of an
+object to the shape of the mask applied to it.
+
+> [!IMPORTANT] In PixiJS a regular mask must be a Graphics or a Sprite object.
+> This allows for much faster masking in canvas as it uses shape clipping.
+> A mask of an object must be in the subtree of its parent.
+> Otherwise, `getLocalBounds` may calculate incorrect bounds, which makes the container's width and height wrong.
+
+Sprite masks read the red channel by default. Use Container#setMask with `channel: 'alpha'`
+to read the alpha channel instead. See MaskOptions#channel for details.
+- `name: string` — The instance name of the object.
+- `label: string` — The instance label of the object.
+- `sortChildren: () => void` — Sorts children by zIndex value. Only sorts if container is marked as dirty.
+- `zIndex: number` — The zIndex of the container.
+
+Controls the rendering order of children within their parent container.
+
+A higher value will mean it will be moved towards the front of the rendering order.
+- `cacheAsTexture: (val: boolean | CacheAsTextureOptions) => void` — Caches this container as a texture. This allows the container to be rendered as a single texture,
+which can improve performance for complex static containers.
+- `updateCacheTexture: () => void` — Updates the cached texture of this container. This will flag the container's cached texture
+to be redrawn on the next render.
+- `cacheAsBitmap: boolean` — Legacy property for backwards compatibility with PixiJS v7 and below.
+Use `cacheAsTexture` instead.
+- `isCachedAsTexture: boolean` — Whether this container is currently cached as a texture.
+**Methods:**
+- `mixin(source: Dict<any>): void` — Mixes all enumerable properties and methods from a source object to Container.
+- `attach<U>(children: U): U[0]` — Adds one or more Containers to this render layer. The Containers will be rendered as part of this layer
+while maintaining their original parent in the scene graph.
+
+If the Container already belongs to a layer, it will be removed from the old layer before being added to this one.
+- `detach<U>(children: U): U[0]` — Removes one or more Containers from this render layer. The Containers will maintain their
+original parent in the scene graph but will no longer be rendered as part of this layer.
+- `detachAll(): void` — Removes all objects from this render layer. Objects will maintain their
+original parent in the scene graph but will no longer be rendered as part of this layer.
+- `sortRenderLayerChildren(): void` — Sort the layer's children using the defined sort function. This method allows manual sorting
+of layer children and is automatically called during rendering if sortableChildren is true.
+- `enableRenderGroup(): void` — Calling this enables a render group for this container.
+This means it will be rendered as a separate set of instructions.
+The transform of the container will also be handled on the GPU rather than the CPU.
+- `disableRenderGroup(): void` — This will disable the render group for this container.
+- `getSize(out?: Size): Size` — Retrieves the size of the container as a [Size]Size object.
+
+This is faster than get the width and height separately.
+- `setSize(value: number | Optional<Size, "height">, height?: number): void` — Sets the size of the container to the specified width and height.
+This is more efficient than setting width and height separately as it only recalculates bounds once.
+- `updateTransform(opts: Partial<UpdateTransformOptions>): this` — Updates the transform properties of the container.
+Allows partial updates of transform properties for optimized manipulation.
+- `setFromMatrix(matrix: Matrix): void` — Updates the local transform properties by decomposing the given matrix.
+Extracts position, scale, rotation, and skew from a transformation matrix.
+- `updateLocalTransform(): void` — Updates the local transform.
+- `destroy(options: DestroyOptions): void` — Removes all internal references and listeners as well as removes children from the display list.
+Do not use a Container after calling `destroy`.
+- `addEventListener<K>(type: K, listener: (e: AllFederatedEventMap[K]) => any, options?: AddListenerOptions): void` — Unlike `on` or `addListener` which are methods from EventEmitter, `addEventListener`
+seeks to be compatible with the DOM's `addEventListener` with support for options.
+- `removeEventListener<K>(type: K, listener: (e: AllFederatedEventMap[K]) => any, options?: RemoveListenerOptions): void` — Unlike `off` or `removeListener` which are methods from EventEmitter, `removeEventListener`
+seeks to be compatible with the DOM's `removeEventListener` with support for options.
+- `dispatchEvent(e: FederatedEvent): boolean` — Dispatch the event on this Container using the event's EventBoundary.
+
+The target of the event is set to `this` and the `defaultPrevented` flag is cleared before dispatch.
+- `removeFromParent(): void` — Remove the Container from its parent Container. If the Container has no parent, do nothing.
+- `replaceChild<U, T>(oldChild: U, newChild: T): void` — Replace a child in the container with a new child. Copying the local transform from the old child to the new one.
+- `getGlobalPosition(point?: Point, skipUpdate?: boolean): Point` — Returns the global position of the container, taking into account the container hierarchy.
+- `toGlobal<P>(position: PointData, point?: P, skipUpdate?: boolean): P` — Calculates the global position of a point relative to this container.
+Takes into account the container hierarchy and transforms.
+- `toLocal<P>(position: PointData, from?: Container, point?: P, skipUpdate?: boolean): P` — Calculates the local position of the container relative to another point.
+Converts coordinates from any coordinate space to this container's local coordinate space.
+- `getLocalBounds(): Bounds` — Retrieves the local bounds of the container as a Bounds object.
+Uses cached values when possible for better performance.
+- `getBounds(skipUpdate?: boolean, bounds?: Bounds): Bounds` — Calculates and returns the (world) bounds of the display object as a Rectangle.
+Takes into account transforms and child bounds.
+- `setMask(options: Partial<MaskOptionsAndMask>): void` — Used to set mask and control mask options on a display object.
+Allows for more detailed control over masking behavior compared to the mask property.
+- `getChildByName(label: string | RegExp, deep?: boolean): Container<ContainerChild>`
+- `getChildByLabel(label: string | RegExp, deep?: boolean): Container<ContainerChild>` — Returns the first child in the container with the specified label.
+Recursive searches are done in a pre-order traversal.
+- `getChildrenByLabel(label: string | RegExp, deep?: boolean, out?: Container<ContainerChild>[]): Container<ContainerChild>[]` — Returns all children in the container with the specified label.
+Recursive searches are done in a pre-order traversal.
+- `getGlobalAlpha(skipUpdate?: boolean): number` — Returns the global (compound) alpha of the container within the scene.
+- `getGlobalTransform(matrix?: Matrix, skipUpdate?: boolean): Matrix` — Returns the global transform matrix of the container within the scene.
+- `getGlobalTint(skipUpdate?: boolean): number` — Returns the global (compound) tint color of the container within the scene.

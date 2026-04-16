@@ -13,9 +13,7 @@ which only requires `x` and `y` properties.
 ```ts
 constructor(x?: number, y?: number): Point
 ```
-**Properties:**
-- `x: number` — Position of the point on the x axis
-- `y: number` — Position of the point on the y axis
+*Inherits 2 properties from `Point` — see [`Point`](../point.md)*
 **Methods:**
 - `clone(): Point` — Creates a clone of this point, which is a new instance with the same `x` and `y` values.
 - `copyFrom(p: PointData): this` — Copies x and y from the given point into this point.

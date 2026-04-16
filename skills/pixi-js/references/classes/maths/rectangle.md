@@ -10,12 +10,7 @@ Used for hit testing, bounds calculation, and general geometric operations.
 ```ts
 constructor(x: string | number, y: string | number, width: string | number, height: string | number): Rectangle
 ```
-**Properties:**
-- `type: SHAPE_PRIMITIVE` — The type of the object, mainly used to avoid `instanceof` checks
-- `x: number` — The X coordinate of the upper-left corner of the rectangle
-- `y: number` — The Y coordinate of the upper-left corner of the rectangle
-- `width: number` — The overall width of this rectangle
-- `height: number` — The overall height of this rectangle
+*Inherits 5 properties from `Rectangle` — see [`Rectangle`](../rectangle.md)*
 **Methods:**
 - `isEmpty(): boolean` — Determines whether the Rectangle is empty (has no area).
 - `clone(): Rectangle` — Creates a clone of this Rectangle
