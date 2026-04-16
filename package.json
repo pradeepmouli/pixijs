@@ -115,7 +115,7 @@
     "typedoc-plugin-markdown": "^4.9.0",
     "typedoc-plugin-mdn-links": "^5.0.10",
     "typedoc-plugin-no-inherit": "^1.6.1",
-    "typedoc-plugin-to-skills": "^0.6.6",
+    "typedoc-plugin-to-skills": "file:../to-skills/packages/typedoc-plugin",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.53.0"
   },
