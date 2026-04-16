@@ -14,7 +14,41 @@ Build games, interactive visualizations, animated UIs, and creative experiences.
 
 ## When to Use
 
+- Starting a new PixiJS project — Application manages the renderer, ticker, and stage
+- You want automatic resize handling and animation loop
+- Loading textures, sprites, fonts, or any external resources
+- Pre-loading assets before showing content
+- You need manual control over rendering (no Application wrapper)
+- Building a scene hierarchy with parent-child relationships
+- Grouping display objects for transforms, visibility, or event handling
+- Drawing shapes, lines, curves, and paths programmatically
+- Creating masks for other display objects
+- Displaying images, texture regions, or sprite sheets
+- You need fast batched rendering of many images
+
+**Avoid when:**
+- You need manual control over the render loop — create Renderer directly instead
+- Displaying static images — use Sprite instead (much faster)
+- Drawing the same shape every frame — cache as texture with generateTexture()
+- Drawing dynamic shapes — use Graphics instead
+- Rendering text — use Text or BitmapText
 - API surface: 19 functions, 205 classes, 223 types, 10 enums, 34 constants
+
+## Pitfalls
+
+- NEVER forget to call app.init() — v8 initialization is async
+- NEVER access app.renderer before init() completes — it's undefined
+- NEVER load assets synchronously or skip await — textures will be empty/white
+- NEVER load the same asset URL multiple times — use Assets.get() for cached access
+- NEVER forget to call renderer.render(stage) in your own loop — nothing displays without it
+- NEVER add a container to itself — creates infinite loop
+- NEVER forget to call destroy() when removing — causes memory leaks
+- NEVER modify Graphics geometry every frame — it rebuilds the mesh. Cache as texture for static shapes
+- NEVER use the v7 API (beginFill, drawRect) — v8 uses a completely new chainable API
+- NEVER create Sprites from unloaded textures — always Assets.load() first
+- NEVER use Sprite.from() in hot loops — it creates new textures each call
+- NEVER change Text content every frame — it re-rasterizes the entire string. Use BitmapText for frequently updating text
+- NEVER use Text for score counters or timers in games — BitmapText is 10-100x faster for dynamic text
 
 ## Configuration
 
